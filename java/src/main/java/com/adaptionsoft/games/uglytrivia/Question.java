@@ -16,6 +16,7 @@ public class Question {
         this.category = category;
     }
 
+
     public static enum Category {
         POP(0),
         SCIENCE(1),

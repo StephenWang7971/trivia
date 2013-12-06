@@ -11,11 +11,11 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class Host {
-    //TODO consider write as Host.ask(player).from(questions);
-    public static Question askQuestionTo(Player player,Map<Question.Category, LinkedList<Question>> questions) {
+    public static Question askQuestionTo(Player player) {
+        Map<Question.Category, LinkedList<Question>> questions = QuestionSet.getInstance().getQuestions();
         Question.Category category = Question.Category.find(player.position % 4);
         LinkedList<Question> queue = questions.get(category);
-        Question q =  queue.get(0);
+        Question q = queue.get(0);
         queue.removeFirst();
         return q;
     }
