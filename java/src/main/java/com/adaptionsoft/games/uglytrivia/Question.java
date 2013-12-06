@@ -16,35 +16,10 @@ public class Question {
         this.category = category;
     }
 
-
     public static enum Category {
-        POP(0),
-        SCIENCE(1),
-        SPORTS(2),
-        ROCK(3);
-
-        private int value;
-
-        Category(int value) {
-            this.value = value;
-        }
-
-        public static Category find(int index) {
-            switch (index) {
-                case 0:
-                    return POP;
-                case 1:
-                    return SCIENCE;
-                case 2:
-                    return SPORTS;
-                case 3:
-                    return ROCK;
-            }
-            return null;
-        }
-
-        public int value() {
-            return value;
-        }
+        POP,
+        SCIENCE,
+        SPORTS,
+        ROCK;
     }
 }

@@ -12,15 +12,14 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return players.size() >= 2;
+        return playerCount() >= 2;
     }
 
-    public boolean add(String playerName) {
+    public void add(String playerName) {
         players.add(new Player(playerName, 0));
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
-        return true;
+        System.out.println("They are player number " + playerCount());
     }
 
     public void roll() {
@@ -41,10 +40,13 @@ public class Game {
     }
 
     public boolean nextPlayer() {
-        boolean winner = currentPlayer().isWin();
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
-        return winner;
+        boolean won = currentPlayer().isWin();
+        currentPlayer = (currentPlayer + 1) % playerCount();
+        return won;
+    }
+
+    private int playerCount() {
+        return players.size();
     }
 
 }
