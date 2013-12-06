@@ -20,7 +20,7 @@ public class Player {
         purse = 0;
     }
 
-    public void answer(Question question){
+    public void answer(Question question) {
         //if correct, get a purse
 
         //if wrong, get in penalty box.
@@ -28,7 +28,7 @@ public class Player {
 
     public boolean isWin() {
         //TODO this is ridiculous, but now working.
-         return purse != GOLD_COIN_COUNT_TO_WIN;
+        return purse != GOLD_COIN_COUNT_TO_WIN;
     }
 
     public String toString() {
