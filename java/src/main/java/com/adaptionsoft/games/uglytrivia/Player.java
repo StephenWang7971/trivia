@@ -45,10 +45,21 @@ public class Player {
     }
 
     public void goInPenaltyBox() {
+        System.out.println("Question was incorrectly answered");
+        System.out.println(name + " was sent to the penalty box");
          inPenaltyBox = true;
     }
 
     public void gettingOutOfPenaltyBox() {
         inPenaltyBox = false;
+    }
+
+    public void award() {
+        System.out.println("Answer was correct!!!!");
+        purse++;
+        System.out.println(name
+                + " now has "
+                + purse
+                + " Gold Coins.");
     }
 }
