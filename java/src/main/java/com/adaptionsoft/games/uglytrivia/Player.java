@@ -47,7 +47,7 @@ public class Player {
         System.out.println(name + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (isInPenaltyBox()) {
+        if (inPenaltyBox) {
             if (roll % 2 != 0) {
                 gettingOutOfPenaltyBox();
                 return roll;
@@ -66,22 +66,18 @@ public class Player {
         System.out.println(name + "'s new location is " + position);
     }
 
-    public boolean isInPenaltyBox() {
-        return inPenaltyBox;
-    }
-
-    public void penalty() {
+    private void penalty() {
         System.out.println("Question was incorrectly answered");
         System.out.println(name + " was sent to the penalty box");
         inPenaltyBox = true;
     }
 
-    public void gettingOutOfPenaltyBox() {
+    private void gettingOutOfPenaltyBox() {
         System.out.println(name + " is getting out of the penalty box");
         inPenaltyBox = false;
     }
 
-    public void award() {
+    private void award() {
         System.out.println("Answer was correct!!!!");
         purse++;
         System.out.println(name + " now has " + purse + " Gold Coins.");
