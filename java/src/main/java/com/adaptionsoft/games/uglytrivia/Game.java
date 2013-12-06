@@ -1,27 +1,24 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
 
-    LinkedList<Question> popQuestions = new LinkedList<Question>();
-    LinkedList<Question> scienceQuestions = new LinkedList<Question>();
-    LinkedList<Question> sportsQuestions = new LinkedList<Question>();
-    LinkedList<Question> rockQuestions = new LinkedList<Question>();
-
-    LinkedList[] questions = new LinkedList[4];
+    Map<Question.Category, LinkedList> questions = new HashMap<Question.Category, LinkedList>();
     Random rand = new Random();
 
     int currentPlayer = 0;
 
     public Game() {
-        questions[0] = popQuestions;
-        questions[1] = scienceQuestions;
-        questions[2] = sportsQuestions;
-        questions[3] = rockQuestions;
+        LinkedList<Question> popQuestions = new LinkedList<Question>();
+        LinkedList<Question> scienceQuestions = new LinkedList<Question>();
+        LinkedList<Question> sportsQuestions = new LinkedList<Question>();
+        LinkedList<Question> rockQuestions = new LinkedList<Question>();
+        questions.put(Question.Category.POP, popQuestions);
+        questions.put(Question.Category.SCIENCE, scienceQuestions);
+        questions.put(Question.Category.SPORTS, sportsQuestions);
+        questions.put(Question.Category.ROCK, rockQuestions);
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast(new Question("Pop Question " + i, Question.Category.POP));
             scienceQuestions.addLast(new Question("Science Question " + i, Question.Category.SCIENCE));
@@ -75,7 +72,7 @@ public class Game {
     }
 
     private void askQuestion() {
-        questions[currentCategory().value()].removeFirst();
+        questions.get(currentCategory()).removeFirst();
     }
 
     private Question.Category currentCategory() {
