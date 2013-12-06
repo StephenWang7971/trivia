@@ -12,10 +12,12 @@ public class Player {
     private final String name;
     public int purse;
     public int position;
-    public boolean inPenaltyBox;
+    private boolean inPenaltyBox;
 
-    public Player(String name) {
+    public Player(String name, int pos) {
         this.name = name;
+        position = pos;
+        purse = 0;
     }
 
     public void answer(Question question){
@@ -25,6 +27,15 @@ public class Player {
     }
 
     public boolean isWin() {
-         return purse == GOLD_COIN_COUNT_TO_WIN;
+        //TODO this is ridiculous, but now working.
+         return purse != GOLD_COIN_COUNT_TO_WIN;
+    }
+
+    public String toString() {
+        return name;
+    }
+
+    public void rollDice(int roll) {
+        position = (position + roll) % 12;
     }
 }
