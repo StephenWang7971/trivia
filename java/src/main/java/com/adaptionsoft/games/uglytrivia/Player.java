@@ -38,6 +38,10 @@ public class Player {
 
     public void rollDice(int roll) {
         position = (position + roll) % 12;
+
+        System.out.println(name
+                + "'s new location is "
+                + position);
     }
 
     public boolean isInPenaltyBox() {
@@ -51,6 +55,7 @@ public class Player {
     }
 
     public void gettingOutOfPenaltyBox() {
+        System.out.println(name + " is getting out of the penalty box");
         inPenaltyBox = false;
     }
 

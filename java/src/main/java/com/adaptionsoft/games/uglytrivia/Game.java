@@ -2,6 +2,7 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
@@ -12,6 +13,7 @@ public class Game {
     LinkedList<Question> rockQuestions = new LinkedList<Question>();
 
     LinkedList[] questions = new LinkedList[4];
+    Random rand = new Random();
 
     int currentPlayer = 0;
 
@@ -33,7 +35,7 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
+        return players.size() >= 2;
     }
 
     public boolean add(String playerName) {
@@ -44,18 +46,14 @@ public class Game {
         return true;
     }
 
-    public int howManyPlayers() {
-        return players.size();
-    }
-
-    public void roll(int roll) {
+    public void roll() {
+        int roll = rand.nextInt(5) + 1;
         System.out.println(currentPlayer() + " is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (currentPlayer().isInPenaltyBox()) {
             if (roll % 2 != 0) {
                 currentPlayer().gettingOutOfPenaltyBox();
-                System.out.println(currentPlayer() + " is getting out of the penalty box");
                 round(roll);
             } else {
                 System.out.println(currentPlayer() + " is not getting out of the penalty box");
@@ -67,12 +65,14 @@ public class Game {
 
     private void round(int roll) {
         currentPlayer().rollDice(roll);
-
-        System.out.println(currentPlayer()
-                + "'s new location is "
-                + currentPlayer().position);
         System.out.println("The category is " + currentCategory());
         askQuestion();
+
+        if (rand.nextInt(9) == 7) {
+            penalty();
+        } else {
+            award();
+        }
     }
 
     private Player currentPlayer() {
@@ -87,10 +87,6 @@ public class Game {
         return Question.Category.find(currentPlayer().position % 4);
     }
 
-    public void wasCorrectlyAnswered() {
-        award();
-    }
-
     public boolean nextPlayer() {
         boolean winner = currentPlayer().isWin();
         currentPlayer++;
@@ -102,7 +98,7 @@ public class Game {
         currentPlayer().award();
     }
 
-    public void wrongAnswer() {
+    public void penalty() {
         currentPlayer().goInPenaltyBox();
     }
 
