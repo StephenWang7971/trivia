@@ -25,8 +25,8 @@ public class Player {
         inPenaltyBox = false;
     }
 
-    public void answer() {
-
+    //TODO question is not used, but it is for the future.
+    public void answer(Question question) {
         if (rand.nextInt(9) == 7) {
             penalty();
         } else {

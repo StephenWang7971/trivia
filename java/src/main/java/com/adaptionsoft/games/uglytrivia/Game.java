@@ -5,7 +5,7 @@ import java.util.*;
 public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
 
-    Map<Question.Category, LinkedList> questions = new HashMap<Question.Category, LinkedList>();
+    Map<Question.Category, LinkedList<Question>> questions = new HashMap<Question.Category, LinkedList<Question>>();
 
     int currentPlayer = 0;
 
@@ -47,17 +47,14 @@ public class Game {
 
     private void round(int roll) {
         currentPlayer().complyRoll(roll);
-        askQuestion();
-        currentPlayer().answer();
+        Question question = Host.askQuestionTo(currentPlayer(), questions);
+        currentPlayer().answer(question);
     }
 
     private Player currentPlayer() {
         return players.get(currentPlayer);
     }
 
-    private void askQuestion() {
-        questions.get(currentPlayer().currentCategory()).removeFirst();
-    }
 
     public boolean nextPlayer() {
         boolean winner = currentPlayer().isWin();
