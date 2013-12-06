@@ -67,12 +67,7 @@ public class Game {
         currentPlayer().rollDice(roll);
         System.out.println("The category is " + currentCategory());
         askQuestion();
-
-        if (rand.nextInt(9) == 7) {
-            penalty();
-        } else {
-            award();
-        }
+        currentPlayer().answer();
     }
 
     private Player currentPlayer() {
@@ -92,14 +87,6 @@ public class Game {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
         return winner;
-    }
-
-    private void award() {
-        currentPlayer().award();
-    }
-
-    public void penalty() {
-        currentPlayer().goInPenaltyBox();
     }
 
 }
