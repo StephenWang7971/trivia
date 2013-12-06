@@ -18,6 +18,7 @@ public class Player {
         this.name = name;
         position = pos;
         purse = 0;
+        inPenaltyBox = false;
     }
 
     public void answer(Question question) {
@@ -37,5 +38,17 @@ public class Player {
 
     public void rollDice(int roll) {
         position = (position + roll) % 12;
+    }
+
+    public boolean isInPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public void goInPenaltyBox() {
+         inPenaltyBox = true;
+    }
+
+    public void gettingOutOfPenaltyBox() {
+        inPenaltyBox = false;
     }
 }
