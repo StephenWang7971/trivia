@@ -23,12 +23,8 @@ public class Game {
             popQuestions.addLast(new Question("Pop Question " + i, Question.Category.POP));
             scienceQuestions.addLast(new Question("Science Question " + i, Question.Category.SCIENCE));
             sportsQuestions.addLast(new Question("Sports Question " + i, Question.Category.SPORTS));
-            rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast(new Question("Rock Question " + i, Question.Category.ROCK));
         }
-    }
-
-    public Question createRockQuestion(int index) {
-        return new Question("Rock Question " + index, Question.Category.ROCK);
     }
 
     public boolean isPlayable() {
@@ -62,7 +58,6 @@ public class Game {
 
     private void round(int roll) {
         currentPlayer().rollDice(roll);
-        System.out.println("The category is " + currentCategory());
         askQuestion();
         currentPlayer().answer();
     }
@@ -72,11 +67,7 @@ public class Game {
     }
 
     private void askQuestion() {
-        questions.get(currentCategory()).removeFirst();
-    }
-
-    private Question.Category currentCategory() {
-        return Question.Category.find(currentPlayer().position % 4);
+        questions.get(currentPlayer().currentCategory()).removeFirst();
     }
 
     public boolean nextPlayer() {

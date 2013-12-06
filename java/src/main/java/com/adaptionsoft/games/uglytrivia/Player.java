@@ -46,6 +46,7 @@ public class Player {
         position = (position + roll) % 12;
 
         System.out.println(name  + "'s new location is "  + position);
+        System.out.println("The category is " + currentCategory());
     }
 
     public boolean isInPenaltyBox() {
@@ -67,5 +68,9 @@ public class Player {
         System.out.println("Answer was correct!!!!");
         purse++;
         System.out.println(name + " now has " + purse  + " Gold Coins.");
+    }
+
+    public Question.Category currentCategory() {
+        return Question.Category.find(position % 4);
     }
 }
