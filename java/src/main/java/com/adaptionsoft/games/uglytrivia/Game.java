@@ -9,10 +9,10 @@ public class Game {
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
     
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    LinkedList<Question> popQuestions = new LinkedList<Question>();
+    LinkedList<Question> scienceQuestions = new LinkedList<Question>();
+    LinkedList<Question> sportsQuestions = new LinkedList<Question>();
+    LinkedList<Question> rockQuestions = new LinkedList<Question>();
 
     LinkedList[] questions = new LinkedList[4];
     
@@ -25,15 +25,15 @@ public class Game {
         questions[2] = sportsQuestions;
         questions[3] = rockQuestions;
     	for (int i = 0; i < 50; i++) {
-			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast(("Science Question " + i));
-			sportsQuestions.addLast(("Sports Question " + i));
+			popQuestions.addLast(new Question("Pop Question " + i, Question.Category.POP));
+			scienceQuestions.addLast(new Question("Science Question " + i, Question.Category.SCIENCE));
+			sportsQuestions.addLast(new Question("Sports Question " + i, Question.Category.SPORTS));
 			rockQuestions.addLast(createRockQuestion(i));
     	}
     }
 
-	public String createRockQuestion(int index){
-		return "Rock Question " + index;
+	public Question createRockQuestion(int index){
+		return new Question("Rock Question " + index, Question.Category.ROCK);
 	}
 	
 	public boolean isPlayable() {

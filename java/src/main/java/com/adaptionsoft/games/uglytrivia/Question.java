@@ -8,6 +8,14 @@ package com.adaptionsoft.games.uglytrivia;
  * To change this template use File | Settings | File Templates.
  */
 public class Question {
+    private final Category category;
+    private final String title;
+
+    public Question(String title, Category category) {
+        this.title = title;
+        this.category = category;
+    }
+
     public static enum Category {
         POP(0),
         SCIENCE(1),
