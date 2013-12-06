@@ -13,11 +13,17 @@ public class Game {
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
+
+    LinkedList[] questions = new LinkedList[4];
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
     
     public  Game(){
+        questions[0] = popQuestions;
+        questions[1] = scienceQuestions;
+        questions[2] = sportsQuestions;
+        questions[3] = rockQuestions;
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
@@ -88,28 +94,30 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.removeFirst());
-		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+        questions[currentCategory().value()].removeFirst();
+//		if (currentCategory() == "Pop")
+//			System.out.println(popQuestions.removeFirst());
+//		if (currentCategory() == "Science")
+//			System.out.println(scienceQuestions.removeFirst());
+//		if (currentCategory() == "Sports")
+//			System.out.println(sportsQuestions.removeFirst());
+//		if (currentCategory() == "Rock")
+//			System.out.println(rockQuestions.removeFirst());
 	}
 	
 	
-	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
-		return "Rock";
+	private Question.Category currentCategory() {
+        return Question.Category.find(places[currentPlayer] % 4);
+//		if (places[currentPlayer] == 0) return "Pop";
+//		if (places[currentPlayer] == 4) return "Pop";
+//		if (places[currentPlayer] == 8) return "Pop";
+//		if (places[currentPlayer] == 1) return "Science";
+//		if (places[currentPlayer] == 5) return "Science";
+//		if (places[currentPlayer] == 9) return "Science";
+//		if (places[currentPlayer] == 2) return "Sports";
+//		if (places[currentPlayer] == 6) return "Sports";
+//		if (places[currentPlayer] == 10) return "Sports";
+//		return "Rock";
 	}
 
 	public boolean wasCorrectlyAnswered() {
