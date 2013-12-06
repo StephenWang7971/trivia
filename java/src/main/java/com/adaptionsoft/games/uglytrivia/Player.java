@@ -35,8 +35,7 @@ public class Player {
     }
 
     public boolean isWin() {
-        //TODO this is ridiculous, but now working.
-        return purse != GOLD_COIN_COUNT_TO_WIN;
+        return purse == GOLD_COIN_COUNT_TO_WIN;
     }
 
     public String toString() {
