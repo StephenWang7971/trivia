@@ -16,7 +16,7 @@ public class Player {
     public int position;
     private boolean inPenaltyBox;
 
-    Random rand = new Random(); //TODO this would change the sequence of rand, but if it is not important. or move to a singleton class.
+    Random rand = new Random();
 
     public Player(String name, int pos) {
         this.name = name;
@@ -42,7 +42,25 @@ public class Player {
         return name;
     }
 
-    public void rollDice(int roll) {
+    public int rollDice() {
+        int roll = rand.nextInt(5) + 1;
+        System.out.println(name + " is the current player");
+        System.out.println("They have rolled a " + roll);
+
+        if (isInPenaltyBox()) {
+            if (roll % 2 != 0) {
+                gettingOutOfPenaltyBox();
+                return roll;
+            } else {
+                System.out.println(name + " is not getting out of the penalty box");
+                return 0;
+            }
+        } else {
+            return roll;
+        }
+    }
+
+    public void complyRoll(int roll) {
         position = (position + roll) % 12;
 
         System.out.println(name  + "'s new location is "  + position);

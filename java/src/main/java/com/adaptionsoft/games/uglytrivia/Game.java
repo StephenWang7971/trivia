@@ -6,7 +6,6 @@ public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
 
     Map<Question.Category, LinkedList> questions = new HashMap<Question.Category, LinkedList>();
-    Random rand = new Random();
 
     int currentPlayer = 0;
 
@@ -40,24 +39,14 @@ public class Game {
     }
 
     public void roll() {
-        int roll = rand.nextInt(5) + 1;
-        System.out.println(currentPlayer() + " is the current player");
-        System.out.println("They have rolled a " + roll);
-
-        if (currentPlayer().isInPenaltyBox()) {
-            if (roll % 2 != 0) {
-                currentPlayer().gettingOutOfPenaltyBox();
-                round(roll);
-            } else {
-                System.out.println(currentPlayer() + " is not getting out of the penalty box");
-            }
-        } else {
+        int roll = currentPlayer().rollDice();
+        if (roll > 0) {
             round(roll);
         }
     }
 
     private void round(int roll) {
-        currentPlayer().rollDice(roll);
+        currentPlayer().complyRoll(roll);
         askQuestion();
         currentPlayer().answer();
     }
